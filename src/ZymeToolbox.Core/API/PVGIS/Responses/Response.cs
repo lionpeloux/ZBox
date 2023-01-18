@@ -19,6 +19,10 @@ namespace ZymeToolbox.Core.API.PVGIS.Responses
         {
             UrlQuery = urlQuery;
 
+            // check is the query is compatible for a json response.
+            if (!urlQuery.Contains("outputformat=json"))
+                throw new ArgumentException($"PVGIS Response is meant to work only with a json payload. Provide a query with 'outputformat=json'.");
+            
             using (var client = new HttpClient())
             {
                 Debug.WriteLine("send request to : " + UrlQuery);

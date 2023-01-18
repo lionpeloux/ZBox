@@ -16,22 +16,14 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
                 "usehorizon",
                 "userhorizon",
                 "raddatabase",
-                "peakpower",
                 "pvtechchoice",
-                "mountingplace",
+                "peakpower",
                 "loss",
-                "fixed",
+                "mountingplace",
                 "angle",
                 "aspect",
                 "optimalinclination",
                 "optimalangles",
-                "inclined_axis",
-                "inclined_optimum",
-                "inclinedaxisangle",
-                "vertical_axis",
-                "vertical_optimum",
-                "verticalaxisangle",
-                "twoaxis",
                 "pvprice",
                 "systemcost",
                 "interest",
@@ -52,7 +44,7 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         public override string Build() => Build("PVcalc");
 
-        public OnGridPVQuery WithHorizon(bool useHorizon, List<double> userHorizon)
+        public OnGridPVQuery WithHorizon(bool? useHorizon, List<double>? userHorizon)
         {
             SetHorizon(useHorizon, userHorizon);
             return this;
@@ -75,7 +67,9 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
             return this;
         }
 
-        public OnGridPVQuery WithPVSystem(double peakpower = 1.0, double loss = 14.0,
+        public OnGridPVQuery WithPVSystem(
+            double peakpower, 
+            double loss,
             PVMountingType mountingplace = PVMountingType.Free,
             PVTechnologyType pvtechchoice = PVTechnologyType.crystSi)
         {

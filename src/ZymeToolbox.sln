@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZymeToolbox.Core", "ZymeToo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZymeToolbox.Grasshopper", "ZymeToolbox.Grasshopper\ZymeToolbox.Grasshopper.csproj", "{199AD6AB-F599-42C5-BB0F-97C1CD50548F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZymeToolbox.TestConsole", "ZymeToolbox.TextConsole\ZymeToolbox.TestConsole.csproj", "{50D23C6F-9155-400F-BDB5-D9397A26CDFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZymeToolbox.TestConsole", "ZymeToolbox.TextConsole\ZymeToolbox.TestConsole.csproj", "{50D23C6F-9155-400F-BDB5-D9397A26CDFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,5 +33,15 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBCBA3F5-F8F4-4421-9642-419FAFB1E0F7}
+	EndGlobalSection
+	GlobalSection(AutomaticVersions) = postSolution
+		UpdateAssemblyVersion = True
+		UpdateAssemblyFileVersion = False
+		UpdateAssemblyInfoVersion = False
+		AdvancedSettingsExpanded = True
+		AssemblyVersionSettings = NoneWithAutoReset.NoneWithAutoReset.IncrementWithResetOnIncrease.TimeStamp
+		UpdatePackageVersion = False
+		AssemblyInfoVersionType = SettingsVersion
+		InheritWinAppVersionFrom = None
 	EndGlobalSection
 EndGlobal

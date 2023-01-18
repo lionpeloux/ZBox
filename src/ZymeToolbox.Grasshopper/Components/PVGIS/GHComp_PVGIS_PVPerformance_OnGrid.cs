@@ -5,17 +5,17 @@ using ZymeToolbox.Core;
 using ZymeToolbox.Core.API.PVGIS;
 using ZymeToolbox.Core.API.PVGIS.Queries;
 
-namespace ZymeToolbox.Climat.Grasshopper.Components
+namespace ZymeToolbox.Grasshopper.Components.PVGIS
 {
-    public class GHComp_PVGIS_OnGridPV : GH_Component
+    public class GHComp_PVGIS_PVPerformance_OnGrid : GH_Component
     {
         protected override System.Drawing.Bitmap Icon => null;
         public override Guid ComponentGuid => new Guid("{5D17478A-E01C-4255-9B10-6AA0717348BC}");
         public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
-        public GHComp_PVGIS_OnGridPV()
-          : base("PVGIS Performance of Grid-Connected System", "PVGIS On-Grid", "Get the performance of a grid-connected PV system from PVGIS API.",
-            "ZBox", "2 | Climat API")
+        public GHComp_PVGIS_PVPerformance_OnGrid()
+          : base("PVGIS Performance of Grid-Connected PV System", "PVGIS Perf On-Grid PV", "Get the performance of a grid-connected PV system from PVGIS API.",
+            "ZBox", "2 | Climate API")
         {
         }
 
@@ -23,7 +23,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
         {
             pManager.AddNumberParameter("Latitude", "latitude", "Latitude, South is negative (decimal degree).", GH_ParamAccess.item);
             pManager.AddNumberParameter("Longitude", "longitude", "Longitude, West is negative (decimal degree).", GH_ParamAccess.item);
-            
+
             // Horizon
             pManager.AddBooleanParameter("Use Horizon", "useHorizon", "Calculation will take into account shadows from high horizon if set to true.", GH_ParamAccess.item, true);
             pManager.AddNumberParameter("User Horizon", "userHorizon", "User specified horizon. Specify the height of the horizon at equidistant directions around the point of interest, in degrees", GH_ParamAccess.list);
@@ -61,19 +61,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             pManager.AddNumberParameter("Elevation", "elevation", "Elevation (meter).", GH_ParamAccess.item);
 
             // Monthy Results
-            pManager.AddIntegerParameter("Month", "month", "Number of the month (1-12).", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Average Daily Energy Production", "E_daily", "Average daily energy production from the given system in kWh/day.", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Average Monthly Energy Production", "E_montly", "Average monthly energy production from the given system in kWh/month.", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Average Daily Sum of Global Irradiance", "G_daily", "Average daily sum of global irradiance per square meter received by the modules of the given system in kWh/m2/day.", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Average Monthly Sum of Global Irradiance", "G_montly", "Average monthly sum of global irradiance per square meter received by the modules of the given system in kWh/m2/month.", GH_ParamAccess.list);
-
-            pManager.AddNumberParameter("Deviation of Monthly Energy Production", "SD", "Standard deviation of the monthly energy production due to year-to-year variation in kWh.", GH_ParamAccess.list);
-
-
-            // Totals
-            pManager.AddTextParameter("Total", "total_header", "Header (name) of the variable as in the json response.", GH_ParamAccess.list);
-            pManager.AddTextParameter("Total", "total_desc", "Description of the variable.", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Total", "total_value", "Value of the variable", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Performance Results", "results", "Performance results of the the given system.", GH_ParamAccess.item);
         }
 
         protected override void SolveInstance(IGH_DataAccess DA)
@@ -86,7 +74,6 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             double longitude = 0;
             bool useHorizon = true;
             var userHorizon = new List<double>();
-            int tracking = 0;
             double inclination = 0;
             double azimut = 0;
             bool poaOptx1 = false;
@@ -129,7 +116,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             query.WithPVCostModel(pvSystemCost, pvAPR, pvLifeTime);
 
             var perf = Services.GetPVPerformance_OnGrid(query);
-            
+
             DA.SetData(0, perf.UrlQuery);
             DA.SetData(1, perf.Meta.ToString(true));
             DA.SetData(2, perf.Inputs.ToString(true));
@@ -137,21 +124,8 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             DA.SetData(3, perf.Location.Latitude);
             DA.SetData(4, perf.Location.Longitude);
             DA.SetData(5, perf.Location.Elevation);
-            
-            DA.SetDataList(6, perf.Month);
-            DA.SetDataList(7, perf.AverageDailyEnergyProduction);
-            DA.SetDataList(8, perf.AverageMonthlyEnergyProduction);
 
-
-            DA.SetDataList(9, perf.AverageDailySumOfGlobalIrradiance_POA);
-            DA.SetDataList(10, perf.AverageMonthlySumOfGlobalIrradiance_POA);
-
-            DA.SetDataList(11, perf.DeviationOfMonthlyEnergyProduction);
-
-            DA.SetDataList(12, perf.Totals.Headers);
-            DA.SetDataList(13, perf.Totals.Descriptions);
-            DA.SetDataList(14, perf.Totals.Values);
-
+            DA.SetData(6, perf.Performance_Fixed);
         }
 
 

@@ -5,7 +5,7 @@ using ZymeToolbox.Core;
 using ZymeToolbox.Core.API.PVGIS;
 using ZymeToolbox.Core.API.PVGIS.Queries;
 
-namespace ZymeToolbox.Climat.Grasshopper.Components
+namespace ZymeToolbox.Grasshopper.Components.PVGIS
 {
     public class GHComp_PVGIS_MonthlyRadiation : GH_Component
     {
@@ -14,8 +14,8 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
         public override GH_Exposure Exposure => GH_Exposure.secondary;
 
         public GHComp_PVGIS_MonthlyRadiation()
-          : base("PVGIS Monthly Radiation", "PVGIS Monthly", "Get the monthly radiation results from PVGIS API.",
-            "ZBox", "2 | Climat API")
+          : base("PVGIS Monthly Radiation", "PVGIS Monthly Radiation", "Get the monthly radiation results from PVGIS API.",
+            "ZBox", "2 | Climate API")
         {
         }
 
@@ -34,7 +34,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
 
             // POA
             pManager.AddNumberParameter("POA Inclination", "poaInclination", "Inclination angle of the POA from the horizontal plane in degree (0° = hozirontal | 90° = vertical). Not relevant for 2-axis tracking POA", GH_ParamAccess.item, 0);
-            
+
             pManager.AddBooleanParameter("Run", "run", "Sends the HTTP request when set to true.", GH_ParamAccess.item);
 
             pManager[2].Optional = true;
@@ -109,7 +109,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             DA.SetData(3, mr.Location.Latitude);
             DA.SetData(4, mr.Location.Longitude);
             DA.SetData(5, mr.Location.Elevation);
-            
+
             DA.SetDataList(6, mr.Year);
             DA.SetDataList(7, mr.Month);
 
@@ -117,7 +117,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             DA.SetDataList(9, mr.GlobalIrradiance_Optimal);
             DA.SetDataList(10, mr.GlobalIrradiance_POA);
             DA.SetDataList(11, mr.DirectIrradiance_Normal);
-            
+
             DA.SetDataList(12, mr.DiffuseToGlobalIrradianceRatio);
             DA.SetDataList(13, mr.AverageTemperature_2m);
         }

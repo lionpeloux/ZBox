@@ -29,20 +29,15 @@ namespace ZymeToolbox.Grasshopper.Components.IO
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
             pManager.AddTextParameter("Url to EPW File", "url", "Url to the .epw file. Url can actually be a path to a local file.", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Run", "run", "The component will run only if set to true.", GH_ParamAccess.item);
         }
 
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("City", "city", "", GH_ParamAccess.item);
+            pManager.AddTextParameter("Info", "info", "", GH_ParamAccess.item);
         }
 
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            bool run = false;
-            if (!DA.GetData("Run", ref run)) return;
-            if (!run) return;
-
             string url = "";
             if (!DA.GetData(0, ref url)) return;
             

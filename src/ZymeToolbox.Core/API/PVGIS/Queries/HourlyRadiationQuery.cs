@@ -46,7 +46,7 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         public override string Build() => Build("seriescalc");
 
-        public HourlyRadiationQuery WithHorizon(bool useHorizon, List<double> userHorizon)
+        public HourlyRadiationQuery WithHorizon(bool? useHorizon, List<double>? userHorizon)
         {
             SetHorizon(useHorizon, userHorizon);
             return this;
@@ -58,23 +58,26 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
             return this;
         }
 
-        public HourlyRadiationQuery WithYears(int? startYear = null, int? endYear = null)
+        public HourlyRadiationQuery WithYears(int? startYear, int? endYear)
         {
             SetYears(startYear, endYear);
             return this;
         }
 
-        public HourlyRadiationQuery WithPVMouting(PVTrackingType tracking = PVTrackingType.Fixed,
-           double? inclination = null,
-           double? azimuth = null,
-           bool? optimizeInclination = null,
-           bool? optimizeInclinationAndAzimuth = null)
+        public HourlyRadiationQuery WithPVMouting(
+            PVTrackingType tracking,
+            double? inclination,
+            double? azimuth,
+            bool? optimizeInclination,
+            bool? optimizeInclinationAndAzimuth)
         {
             SetPVMouting(tracking, inclination, azimuth, optimizeInclination, optimizeInclinationAndAzimuth);
             return this;
         }
 
-        public HourlyRadiationQuery WithPVSystem(double peakpower, double loss,
+        public HourlyRadiationQuery WithPVSystem(
+            double peakpower, 
+            double loss,
             PVMountingType mountingplace = PVMountingType.Free,
             PVTechnologyType pvtechchoice = PVTechnologyType.crystSi)
         {

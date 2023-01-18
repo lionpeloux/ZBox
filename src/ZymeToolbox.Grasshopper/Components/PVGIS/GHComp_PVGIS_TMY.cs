@@ -6,7 +6,7 @@ using ZymeToolbox.Core;
 using ZymeToolbox.Core.API.PVGIS;
 using ZymeToolbox.Core.API.PVGIS.Queries;
 
-namespace ZymeToolbox.Climat.Grasshopper.Components
+namespace ZymeToolbox.Grasshopper.Components.PVGIS
 {
     public class GHComp_PVGIS_TMY : GH_Component
     {
@@ -16,7 +16,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
 
         public GHComp_PVGIS_TMY()
           : base("PVGIS Typical Meteorological Year", "PVGIS TMY", "Get the Typical Meteorological Year (TMY) from PVGIS API.",
-            "ZBox", "2 | Climat API")
+            "ZBox", "2 | Climate API")
         {
         }
 
@@ -65,7 +65,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             pManager.AddNumberParameter("Air Pressure", "P", "Surface air pressure in Pa.", GH_ParamAccess.list);
 
             pManager.AddNumberParameter("Wind Speed at 10m", "WS10m", "Wind speed at 10 meters in m/s.", GH_ParamAccess.list);
-            pManager.AddNumberParameter("Wind Direction at 10m", "WD10m", "Wind speed at 10 meters in m/s.", GH_ParamAccess.list);
+            pManager.AddNumberParameter("Wind Direction at 10m", "WD10m", "Wind direction at 10 meters in degree (0° = North, 90° = Est, 180° = South, 270° = West).", GH_ParamAccess.list);
         }
 
         protected override void SolveInstance(IGH_DataAccess DA)
@@ -121,13 +121,13 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
                         throw new ArgumentException("File must have '*.epw' extension.");
                     Services.WriteEPW(path, latitude, longitude, startYear, endYear, useHorizon, null);
                 }
-   
+
 
             }
 
 
-            
-            
+
+
             DA.SetData(0, response.UrlQuery);
             DA.SetData(1, response.Meta.ToString(true));
             DA.SetData(2, response.Inputs.ToString(true));

@@ -28,7 +28,16 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
             
             switch (value)
             {
-                case bool :
+                case bool:
+                    Params[paramName] = Convert.ToInt32(value).ToString();
+                    break;
+                case PVMountingType:
+                    Params[paramName] = Convert.ToString(value).ToLower();
+                    break;
+                case PVTechnologyType:
+                    Params[paramName] = Convert.ToString(value);
+                    break;
+                case PVTrackingType:
                     Params[paramName] = Convert.ToInt32(value).ToString();
                     break;
                 default:
@@ -55,17 +64,14 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         public abstract string Build();
 
-        protected void SetHorizon(bool? useHorizon, List<double> userHorizon)
+        protected void SetHorizon(bool? useHorizon, List<double>? userHorizon)
         {
-            if (useHorizon != null)
-                SetValue("usehorizon", useHorizon);
-
+            SetValue("usehorizon", useHorizon);
             if (userHorizon != null)
                 SetValue("userhorizon", string.Join(",", userHorizon.Select(h => Math.Round(h, 2))));
-            
         }
 
-        protected void SetRadiationDatabase(string radDatabaseName)
+        protected void SetRadiationDatabase(string? radDatabaseName)
         {
             SetValue("raddatabase", radDatabaseName);
         }
@@ -76,22 +82,13 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
             SetValue("endyear", endYear);
         }
 
-        protected void SetMonth(int? month)
-        {
-            SetValue("month", month);
-        }
 
-        protected void SetPVOrientation(double? inclination = null, double? azimuth = null)
-        {
-            SetValue("angle", inclination);
-            SetValue("aspect", azimuth);
-        }
-
-        protected void SetPVMouting(PVTrackingType? tracking = PVTrackingType.Fixed,
-            double? inclination = null,
-            double? azimuth = null,
-            bool? optimizeInclination = null,
-            bool? optimizeInclinationAndAzimuth = null)
+        protected void SetPVMouting(
+            PVTrackingType? tracking,
+            double? inclination,
+            double? azimuth,
+            bool? optimizeInclination,
+            bool? optimizeInclinationAndAzimuth)
         {
             SetValue("trackingtype", (int)tracking);
             SetValue("angle", inclination);
@@ -101,14 +98,16 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         }
 
-        protected void SetPVSystem(double peakpower, double loss,
-            PVMountingType mountingplace = PVMountingType.Free,
-            PVTechnologyType pvtechchoice = PVTechnologyType.crystSi)
+        protected void SetPVSystem(
+            double? peakpower, 
+            double? loss,
+            PVMountingType? mountingplace = PVMountingType.Free,
+            PVTechnologyType? pvtechchoice = PVTechnologyType.crystSi)
         {
             SetValue("peakpower", peakpower);
             SetValue("loss", loss);
-            SetValue("pvtechchoice", Convert.ToString(pvtechchoice));
-            SetValue("mountingplace", Convert.ToString(mountingplace).ToLower());
+            SetValue("pvtechchoice", pvtechchoice);
+            SetValue("mountingplace", mountingplace);
         }
     }
 }

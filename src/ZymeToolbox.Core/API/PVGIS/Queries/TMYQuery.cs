@@ -33,13 +33,13 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         public override string Build() => Build("tmy");
 
-        public TMYQuery WithHorizon(bool? useHorizon, List<double> userHorizon)
+        public TMYQuery WithHorizon(bool? useHorizon, List<double>? userHorizon)
         {
             SetHorizon(useHorizon, userHorizon);
             return this;
         }
 
-        public TMYQuery WithYears(int? startYear = null, int? endYear = null)
+        public TMYQuery WithYears(int? startYear, int? endYear)
         {
             SetYears(startYear, endYear);
             return this;

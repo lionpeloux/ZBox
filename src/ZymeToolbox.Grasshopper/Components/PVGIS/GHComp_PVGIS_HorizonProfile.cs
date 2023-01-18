@@ -6,7 +6,7 @@ using ZymeToolbox.Core;
 using ZymeToolbox.Core.API.PVGIS;
 using ZymeToolbox.Core.API.PVGIS.Queries;
 
-namespace ZymeToolbox.Climat.Grasshopper.Components
+namespace ZymeToolbox.Grasshopper.Components.PVGIS
 {
     public class GHComp_PVGIS_HorizonProfile : GH_Component
     {
@@ -16,8 +16,8 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
         public override GH_Exposure Exposure => GH_Exposure.tertiary;
 
         public GHComp_PVGIS_HorizonProfile()
-          : base("PVGIS Horizon Profile", "PVGIS Horizon", "Get the horizon profile from PVGIS API.",
-            "ZBox", "2 | Climat API")
+          : base("PVGIS Horizon Profile", "PVGIS Horizon Profile", "Get the horizon profile from PVGIS API.",
+            "ZBox", "2 | Climate API")
         {
         }
 

@@ -5,7 +5,7 @@ using ZymeToolbox.Core;
 using ZymeToolbox.Core.API.PVGIS;
 using ZymeToolbox.Core.API.PVGIS.Queries;
 
-namespace ZymeToolbox.Climat.Grasshopper.Components
+namespace ZymeToolbox.Grasshopper.Components.PVGIS
 {
     public class GHComp_PVGIS_HourlyRadiation : GH_Component
     {
@@ -14,8 +14,8 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
         public override GH_Exposure Exposure => GH_Exposure.secondary;
 
         public GHComp_PVGIS_HourlyRadiation()
-          : base("PVGIS Hourly Radiation", "PVGIS Hourly", "Get the hourly radiation results from PVGIS API.",
-            "ZBox", "2 | Climat API")
+          : base("PVGIS Hourly Radiation", "PVGIS Hourly Radiation", "Get the hourly radiation results from PVGIS API.",
+            "ZBox", "2 | Climate API")
         {
         }
 
@@ -23,7 +23,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
         {
             pManager.AddNumberParameter("Latitude", "latitude", "Latitude, South is negative (decimal degree).", GH_ParamAccess.item);
             pManager.AddNumberParameter("Longitude", "longitude", "Longitude, West is negative (decimal degree).", GH_ParamAccess.item);
-            
+
             // Year
             pManager.AddIntegerParameter("Start Year", "startYear", "Start year of the serie. If not provided will default to first available year.", GH_ParamAccess.item);
             pManager.AddIntegerParameter("End Year", "endYear", "End year of the serie. If not provided will default to last available year.", GH_ParamAccess.item);
@@ -62,13 +62,13 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             pManager.AddNumberParameter("Elevation", "elevation", "Elevation (meter).", GH_ParamAccess.item);
 
             pManager.AddTextParameter("Time", "time", "Hourly time stamps.", GH_ParamAccess.list);
-            
+
             pManager.AddNumberParameter("PV Power", "pvPower", "PV system power in W. If requested.", GH_ParamAccess.list);
-            
+
             pManager.AddNumberParameter("Direct Irradiance", "radDirect", "Direct (beam) solar irradiance on the (inclined) plane of array in W/m2.", GH_ParamAccess.list);
             pManager.AddNumberParameter("Diffuse Irradiance", "radDiffuse", "Diffuse solar irradiance on the (inclined) plane of array in W/m2.", GH_ParamAccess.list);
             pManager.AddNumberParameter("Reflected Irradiance", "radReflected", "Reflected (ground) solar irradiance on the (inclined) plane of array in W/m2.", GH_ParamAccess.list);
-            
+
             pManager.AddNumberParameter("Sun Heigh", "sunHeight", "Sun height in degree.", GH_ParamAccess.list);
             pManager.AddNumberParameter("Temperature at 2m", "T2m", "Temperature at 2 meters in °C.", GH_ParamAccess.list);
             pManager.AddNumberParameter("Wind Speed at 10m", "WS10m", "Wind speed at 10 meters in m/s.", GH_ParamAccess.list);
@@ -101,7 +101,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             if (!DA.GetData(1, ref longitude)) return;
             var query = HourlyRadiationQuery.Create(latitude, longitude, true, "json");
 
-            if (!DA.GetData(2, ref startYear)) startYear = null ;
+            if (!DA.GetData(2, ref startYear)) startYear = null;
             if (!DA.GetData(3, ref endYear)) endYear = null;
             query.WithYears(startYear, endYear);
 
@@ -147,6 +147,6 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
 
 
 
-  
+
     }
 }

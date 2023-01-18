@@ -24,7 +24,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
                 "Build an index of all available weather data from Climate.OneBuilding.Org. " +
                 "This is achieved through parsing the input files. " +
                 "Note that the index is built only once (unless urls parameter is changed) to allow reactive filtering",
-            "ZBox", "2 | Climat API")
+            "ZBox", "2 | Climate API")
         {
         }
 

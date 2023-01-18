@@ -5,11 +5,11 @@
     <Company>ZYME engineering</Company>
     <TargetFramework>net48</TargetFramework>
     <LangVersion>11.0</LangVersion>
-    <Version>1.0</Version>
     <Title>ZymeToolbox.Grasshopper</Title>
     <Description>Description of ZymeToolbox.Grasshopper</Description>
     <TargetExt>.gha</TargetExt>
     <DeployPath>C:\Users\Lionel\AppData\Roaming\Grasshopper\Libraries\$(SolutionName)\</DeployPath>
+    <AssemblyVersion>0.1</AssemblyVersion>
   </PropertyGroup>
   
   <ItemGroup>

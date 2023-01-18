@@ -5,7 +5,7 @@ using ZymeToolbox.Core;
 using ZymeToolbox.Core.API.PVGIS;
 using ZymeToolbox.Core.API.PVGIS.Queries;
 
-namespace ZymeToolbox.Climat.Grasshopper.Components
+namespace ZymeToolbox.Grasshopper.Components.PVGIS
 {
     public class GHComp_PVGIS_DailyRadiation : GH_Component
     {
@@ -14,8 +14,8 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
         public override GH_Exposure Exposure => GH_Exposure.secondary;
 
         public GHComp_PVGIS_DailyRadiation()
-          : base("PVGIS Daily Radiation", "PVGIS Daily", "Get the daily radiation results from PVGIS API.",
-            "ZBox", "2 | Climat API")
+          : base("PVGIS Daily Radiation", "PVGIS Daily Radiation", "Get the daily radiation results from PVGIS API.",
+            "ZBox", "2 | Climate API")
         {
         }
 
@@ -23,7 +23,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
         {
             pManager.AddNumberParameter("Latitude", "latitude", "Latitude, South is negative (decimal degree).", GH_ParamAccess.item);
             pManager.AddNumberParameter("Longitude", "longitude", "Longitude, West is negative (decimal degree).", GH_ParamAccess.item);
-            
+
             // MONTH
             pManager.AddIntegerParameter("Month", "month", "Number of the month. If 0 all 12 months will be returned.", GH_ParamAccess.item, 0);
 
@@ -34,7 +34,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             // POA
             pManager.AddNumberParameter("POA Inclination", "poaInclination", "Inclination angle of the POA from the horizontal plane in degree (0° = hozirontal | 90° = vertical). Not relevant for 2-axis tracking POA", GH_ParamAccess.item, 0);
             pManager.AddNumberParameter("POA Azimuth", "poaAzimuth", "Azimuth angle of the fixed POA in degree (0° = South, 90° = West, -90° = East). Not relevant for POA with tracking.", GH_ParamAccess.item, 0);
-            
+
             // OUTPUTS
             pManager.AddBooleanParameter("Time Unit", "localTime", "If true, output the time in the local time zone (not daylight saving time) instead of UTC.", GH_ParamAccess.item, false);
 
@@ -52,7 +52,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             pManager.AddNumberParameter("Longitude", "longitude", "Longitude, West is negative (decimal degree).", GH_ParamAccess.item);
             pManager.AddNumberParameter("Elevation", "elevation", "Elevation (meter).", GH_ParamAccess.item);
 
-            pManager.AddNumberParameter("Month", "month", "Number of the month (1-12).", GH_ParamAccess.list);
+            pManager.AddIntegerParameter("Month", "month", "Number of the month (1-12).", GH_ParamAccess.list);
             pManager.AddTextParameter("Time", "time", "Hourly time stamps in the format hh:mm. Could be UTC or Local.", GH_ParamAccess.list);
 
             // POA
@@ -108,7 +108,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
 
             DA.GetData(7, ref localTime);
             if (localTime) query.WithLocalTime();
-            
+
             var dr = Services.GetDailyRadiation(query);
 
             DA.SetData(0, dr.UrlQuery);
@@ -118,7 +118,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             DA.SetData(3, dr.Location.Latitude);
             DA.SetData(4, dr.Location.Longitude);
             DA.SetData(5, dr.Location.Elevation);
-            
+
             DA.SetDataList(6, dr.Month);
             DA.SetDataList(7, dr.Time);
 
@@ -126,7 +126,7 @@ namespace ZymeToolbox.Climat.Grasshopper.Components
             DA.SetDataList(9, dr.GlobalIrradiance_POA);
             DA.SetDataList(10, dr.DirectIrradiance_POA);
             DA.SetDataList(11, dr.DiffuseIrradiance_POA);
-            
+
             DA.SetDataList(12, dr.GlobalClearSkyIrradiance_2Axis);
             DA.SetDataList(13, dr.GlobalIrradiance_2Axis);
             DA.SetDataList(14, dr.DirectIrradiance_2Axis);

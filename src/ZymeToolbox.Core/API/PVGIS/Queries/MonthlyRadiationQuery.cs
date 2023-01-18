@@ -41,7 +41,7 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         public override string Build() => Build("MRcalc");
 
-        public MonthlyRadiationQuery WithHorizon(bool useHorizon, List<double> userHorizon)
+        public MonthlyRadiationQuery WithHorizon(bool? useHorizon, List<double>? userHorizon)
         {
             SetHorizon(useHorizon, userHorizon);
             return this;
@@ -59,7 +59,7 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
             return this;
         }
 
-        public MonthlyRadiationQuery WithIrradiationOutputs(bool? globalHorizontalRad = null, bool? directNormalRad = null, bool ? globalRadAtOptimalAngle = null, double? inclination = 0)
+        public MonthlyRadiationQuery WithIrradiationOutputs(bool? globalHorizontalRad, bool? directNormalRad, bool? globalRadAtOptimalAngle, double? inclination)
         {
             SetValue("horirrad", globalHorizontalRad);
             SetValue("mr_dni", directNormalRad);

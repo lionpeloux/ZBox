@@ -41,7 +41,7 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         public override string Build() => Build("DRcalc");
 
-        public DailyRadiationQuery WithHorizon(bool useHorizon, List<double> userHorizon)
+        public DailyRadiationQuery WithHorizon(bool? useHorizon, List<double>? userHorizon)
         {
             SetHorizon(useHorizon, userHorizon);
             return this;
@@ -55,22 +55,23 @@ namespace ZymeToolbox.Core.API.PVGIS.Queries
 
         public DailyRadiationQuery WithMonth(int month)
         {
-            SetMonth(month);
+            SetValue("month", month);
             return this;
         }
         public DailyRadiationQuery WithAllMonths()
         {
-            SetMonth(0);
+            SetValue("month", 0);
             return this;
         }
 
         public DailyRadiationQuery WithOrientation(double? inclination = null, double? azimuth = null)
         {
-            SetPVOrientation(inclination, azimuth);
+            SetValue("angle", inclination);
+            SetValue("aspect", azimuth);
             return this;
         }
 
-        public DailyRadiationQuery WithOutputs(bool? global = null, bool? global_2axis = null, bool? clearsky = null, bool? clearsky_2axis = null)
+        public DailyRadiationQuery WithOutputs(bool? global, bool? global_2axis, bool? clearsky, bool? clearsky_2axis)
         {
             SetValue("global", global);
             SetValue("glob_2axis", global_2axis);

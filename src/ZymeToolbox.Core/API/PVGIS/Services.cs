@@ -12,11 +12,14 @@ namespace ZymeToolbox.Core.API.PVGIS
         public static string APIVersion => "5.2";
         public static string APIEntryPoint => "https://re.jrc.ec.europa.eu/api/v5_2/";
 
+        public static OnGridPVResponse GetPVPerformance_OnGrid(OnGridPVQuery query) => OnGridPVResponse.Create(query);
+        public static OffGridPVResponse GetPVPerformance_OffGrid(OffGridPVQuery query) => OffGridPVResponse.Create(query);
+        public static TrackingPVResponse GetPVPerformance_Tracking(TrackingPVQuery query) => TrackingPVResponse.Create(query);
+
         public static HourlyRadiationResponse GetHourlyRadiation(HourlyRadiationQuery query) =>  HourlyRadiationResponse.Create(query);
         public static DailyRadiationResponse GetDailyRadiation(DailyRadiationQuery query) => DailyRadiationResponse.Create(query);
         public static MonthlyRadiationResponse GetMonthlyRadiation(MonthlyRadiationQuery query) => MonthlyRadiationResponse.Create(query);
-        public static OnGridPVResponse GetPVPerformance_OnGrid(OnGridPVQuery query) => OnGridPVResponse.Create(query);
-
+        
         public static HorizonProfileResponse GetHorizonProfile(HorizonProfileQuery query) => HorizonProfileResponse.Create(query);
         public static TMYResponse GetTMY(TMYQuery query) => TMYResponse.Create(query);
         
