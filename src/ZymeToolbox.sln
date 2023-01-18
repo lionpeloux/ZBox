@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZymeToolbox.Core", "ZymeToolbox.Core\ZymeToolbox.Core.csproj", "{C622148E-29ED-4102-90B4-00DA88978995}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZymeToolbox.Grasshopper", "ZymeToolbox.Grasshopper\ZymeToolbox.Grasshopper.csproj", "{199AD6AB-F599-42C5-BB0F-97C1CD50548F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZymeToolbox.TestConsole", "ZymeToolbox.TextConsole\ZymeToolbox.TestConsole.csproj", "{50D23C6F-9155-400F-BDB5-D9397A26CDFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C622148E-29ED-4102-90B4-00DA88978995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C622148E-29ED-4102-90B4-00DA88978995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C622148E-29ED-4102-90B4-00DA88978995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C622148E-29ED-4102-90B4-00DA88978995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{199AD6AB-F599-42C5-BB0F-97C1CD50548F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{199AD6AB-F599-42C5-BB0F-97C1CD50548F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{199AD6AB-F599-42C5-BB0F-97C1CD50548F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{199AD6AB-F599-42C5-BB0F-97C1CD50548F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50D23C6F-9155-400F-BDB5-D9397A26CDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50D23C6F-9155-400F-BDB5-D9397A26CDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50D23C6F-9155-400F-BDB5-D9397A26CDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50D23C6F-9155-400F-BDB5-D9397A26CDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBCBA3F5-F8F4-4421-9642-419FAFB1E0F7}
+	EndGlobalSection
+EndGlobal

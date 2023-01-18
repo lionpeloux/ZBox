@@ -1,0 +1,86 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+  <PropertyGroup>
+    <Authors>Lionel du Peloux</Authors>
+    <Company>ZYME engineering</Company>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <Version>1.0</Version>
+    <Title>ZymeToolbox.Grasshopper</Title>
+    <Description>Description of ZymeToolbox.Grasshopper</Description>
+    <TargetExt>.gha</TargetExt>
+    <DeployPath>C:\Users\Lionel\AppData\Roaming\Grasshopper\Libraries\$(SolutionName)\</DeployPath>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Grasshopper" Version="7.13.21348.13001" IncludeAssets="compile;build" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Parameters\" />
+    <Folder Include="Types\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ZymeToolbox.Core\ZymeToolbox.Core.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  
+  <PropertyGroup Condition="$(Configuration) == 'Debug' AND $([MSBuild]::IsOSPlatform(Windows))">
+    <StartProgram>C:\Program Files\Rhino 7\System\Rhino.exe</StartProgram>
+    <StartArguments></StartArguments>
+    <StartAction>Program</StartAction>
+  </PropertyGroup>
+
+  <Target Name="CleanDeploPath" BeforeTargets="PostBuildEvent">
+    <Message Text="------------------------------------------------" Importance="High" />
+    <Message Text="CLEAN DEPLOY DIR--------------------------------" Importance="High" />
+    <ItemGroup>
+      <DeleteAfterBuild Include="$(DeployPath)*.*" />
+    </ItemGroup>
+    <Delete Files="@(DeleteAfterBuild)">
+      <Output TaskParameter="DeletedFiles" ItemName="DeletedList" />
+    </Delete>
+    <Message Text="Deleted files: '@(DeletedList)'" Importance="High" />
+    <Message Text="------------------------------------------------" Importance="High" />
+  </Target>
+
+  <!-- POST BUILD EVENTS in DEBUG mode -->
+  <Target Name="CopyDebugFiles" AfterTargets="PostBuildEvent" Condition="$(Configuration) == 'Debug'">
+    <Message Text="Copying DEBUG files to Grasshopper Libraries directory" Importance="High" />
+    <ItemGroup>
+      <DebugSourceFiles Include="$(TargetDir)*.*" />
+      <DebugDestinationFolder Include="$(DeployPath)" />
+    </ItemGroup>
+    <Message Text="DeployPath is : $(DeployPath)" Importance="High" />
+    <Copy SourceFiles="@(DebugSourceFiles)" DestinationFolder="@(DebugDestinationFolder)" />
+    <Message Text="Copying DEBUG file completed" Importance="High" />
+  </Target>
+
+  <!-- POST BUILD EVENTS in RELEASE mode -->
+  <Target Name="CopyReleaseFiles" AfterTargets="PostBuildEvent" Condition="$(Configuration) == 'Release'">
+    <Message Text="Copying RELEASE files to Grasshopper Libraries directory" Importance="High" />
+    <ItemGroup>
+      <ReleaseSourceFiles Include="$(TargetDir)*.*" />
+      <ReleaseDestinationFolder Include="$(DeployPath)" />
+      <!--<ReleaseSourceFiles Include="$(TargetDir)$(ProjectName).gha" />
+      <ReleaseSourceFiles Include="$(SolutionDir)license\Pretcon.License.txt" />
+      <ReleaseDestinationFiles Include="$(DeployPath)$(SolutionName).gha" />
+      <ReleaseDestinationFiles Include="$(DeployPath)Pretcon.License.txt" />-->
+    </ItemGroup>
+    <Message Text="DeployPath is : $(DeployPath)" Importance="High" />
+    <!--<Copy SourceFiles="@(ReleaseSourceFiles)" DestinationFiles="@(ReleaseDestinationFiles)" />-->
+    <Copy SourceFiles="@(ReleaseSourceFiles)" DestinationFolder="@(ReleaseDestinationFolder)" />
+    <Message Text="Copying RELEASE file completed" Importance="High" />
+  </Target>
+
+</Project>
