@@ -5,7 +5,6 @@
 
 # Lionel
 **/.DS_Store
-/[Dd]oc
 /src/ZymeToolbox.TextConsole
 /src/*.[Gg]h
 /src/OpenDPE.Core.SourceGenerator
